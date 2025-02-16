@@ -47,7 +47,6 @@ export default function App() {
     environmentState,
     setEnvironmentState,
     selection,
-    setSelection
   });
 
   // Keyboard event listeners
