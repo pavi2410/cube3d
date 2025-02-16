@@ -70,9 +70,9 @@ export function isFaceVisible(points: Vec3[]): boolean {
 
   // For isometric view, camera looks from top-right-front
   const viewVector = {
-    x: -Math.SQRT1_2, // cos(45°)
-    y: -0.3827, // -sin(30°)
-    z: -Math.SQRT1_2, // cos(45°)
+    x: Math.SQRT1_2, // cos(45°)
+    y: -0.5, // -sin(30°)
+    z: Math.SQRT1_2, // cos(45°)
   };
 
   // Dot product between normal and view vector
@@ -84,9 +84,9 @@ export function isFaceVisible(points: Vec3[]): boolean {
 
 export function isPointBehind(point: Vec3, center: Vec3): boolean {
   const viewVector = {
-    x: -Math.SQRT1_2, // cos(45°)
-    y: -0.3827, // -sin(30°)
-    z: -Math.SQRT1_2, // cos(45°)
+    x: Math.SQRT1_2, // cos(45°)
+    y: -0.5, // -sin(30°)
+    z: Math.SQRT1_2, // cos(45°)
   };
 
   const toPoint = {
