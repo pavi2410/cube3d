@@ -10,6 +10,7 @@ import { DebugPanel } from './components/ui/DebugPanel';
 import { Normals } from './components/geometry/Normals';
 import { ControlPanel } from './components/ui/ControlPanel';
 import { useKeydownHandler } from './hooks/useKeydownHandler';
+import { ProjectInfo } from './components/ui/ProjectInfo';
 
 // Constants with type annotations
 const DEFAULT_OBJECT_STATE: ObjectState = {
@@ -124,6 +125,7 @@ export default function App() {
       background: '#1a1a1a',
       overflow: 'hidden'
     }}>
+      <ProjectInfo />
       <svg
         width="100%"
         height="100%"

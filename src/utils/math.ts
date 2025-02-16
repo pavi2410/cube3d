@@ -102,3 +102,37 @@ export function isPointBehind(point: Vec3, center: Vec3): boolean {
     0
   );
 }
+
+/**
+ * Determines if a corner point is visible based on the cube's rotation
+ * @param cornerIndex The index of the corner (0-7)
+ * @param rotation The rotation of the cube in radians
+ * @returns boolean indicating if the corner is visible
+ */
+export function isCornerVisible(cornerIndex: number, rotation: Vec3): boolean {
+  // Get corner position (-1 or 1 for each axis)
+  const cornerPos = {
+    x: (cornerIndex & 1) ? 1 : -1,
+    y: (cornerIndex & 2) ? 1 : -1,
+    z: (cornerIndex & 4) ? 1 : -1
+  };
+
+  // Rotate the corner
+  const rotated = rotatePoint(cornerPos, rotation);
+
+  // View vector (from isometric view)
+  const viewVector = {
+    x: Math.SQRT1_2,  // cos(45°)
+    y: -0.5,         // -sin(30°)
+    z: Math.SQRT1_2   // cos(45°)
+  };
+
+  // Dot product with view vector
+  const dotProduct = 
+    rotated.x * viewVector.x + 
+    rotated.y * viewVector.y + 
+    rotated.z * viewVector.z;
+
+  // Corner is visible if it's on the front side (negative dot product)
+  return dotProduct < 0;
+}

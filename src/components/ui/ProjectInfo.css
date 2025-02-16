@@ -1,0 +1,53 @@
+.project-info {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 6px;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  z-index: 1000;
+  transition: all 0.2s ease-out;
+  width: fit-content;
+  padding: 6px 10px;
+}
+
+.project-title {
+  font-size: 16px;
+  margin: 0;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.project-details {
+  display: none;
+}
+
+.project-creator {
+  font-size: 14px;
+  margin: 8px 0;
+  opacity: 0.8;
+}
+
+.project-link {
+  color: #64b5f6;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Expanded state on hover */
+.project-info:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.project-info:hover .project-details {
+  display: block;
+  margin-top: 8px;
+}
+
+.project-info:hover .project-link:hover {
+  text-decoration: underline;
+} 

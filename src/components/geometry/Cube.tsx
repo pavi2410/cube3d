@@ -3,7 +3,7 @@ import { CUBE_VERTICES, CUBE_FACES } from './CubeGeometry';
 import { Face } from './Face';
 import { Edge } from './Edge';
 import { Corner } from './Corner';
-import { rotatePoint, projectPoint, isFaceVisible } from '../../utils/math';
+import { rotatePoint, projectPoint, isFaceVisible, isCornerVisible } from '../../utils/math';
 
 type CubeProps = {
   position: Vec3;
@@ -14,6 +14,10 @@ type CubeProps = {
   onSelect: (type: Selection['type'], index: number) => void;
   onDeselect: () => void;
 };
+
+// Add face and edge IDs
+const FACE_IDS = ['front', 'back', 'top', 'bottom', 'left', 'right'];
+const EDGE_IDS = ['top', 'right', 'bottom', 'left'];
 
 export const Cube = ({
   position,
@@ -54,7 +58,7 @@ export const Cube = ({
       {/* Faces */}
       {CUBE_FACES.map((face, index) => (
         <Face
-          key={`face-${index}`}
+          key={`face-${FACE_IDS[index]}`}
           vertices={face.indices.map(i => transformedVertices[i])}
           projectedVertices={face.indices.map(i => projectedVertices[i])}
           index={index}
@@ -71,7 +75,7 @@ export const Cube = ({
           const end = face.indices[(edgeIndex + 1) % face.indices.length];
           return (
             <Edge
-              key={`edge-${faceIndex}-${edgeIndex}`}
+              key={`edge-${FACE_IDS[faceIndex]}-${EDGE_IDS[edgeIndex]}`}
               start={projectedVertices[start]}
               end={projectedVertices[end]}
               index={edgeIndex}
@@ -86,16 +90,21 @@ export const Cube = ({
       )}
 
       {/* Corners */}
-      {transformedVertices.map((_vertex, index) => (
-        <Corner
-          key={`corner-${index}`}
-          point={projectedVertices[index]}
-          index={index}
-          selection={selection}
-          onSelect={onSelect}
-          onDeselect={onDeselect}
-        />
-      ))}
+      {transformedVertices.map((vertex, index) => {
+        // Only render if corner is visible
+        if (!isCornerVisible(index, rotation)) return null;
+
+        return (
+          <Corner
+            key={`corner-${vertex.x.toFixed(3)}-${vertex.y.toFixed(3)}-${vertex.z.toFixed(3)}`}
+            point={projectedVertices[index]}
+            index={index}
+            selection={selection}
+            onSelect={onSelect}
+            onDeselect={onDeselect}
+          />
+        );
+      })}
     </g>
   );
 }; 

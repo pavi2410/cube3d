@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #333;
+}
+
+* {
+  user-select: none;
+  box-sizing: border-box;
+}

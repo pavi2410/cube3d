@@ -46,7 +46,7 @@ export const DebugPanel = ({
       right: '20px',
       background: 'rgba(0, 0, 0, 0.8)',
       borderRadius: '8px',
-      padding: '12px',
+      padding: '6px',
       color: 'white',
       fontFamily: 'monospace',
       fontSize: '12px',
@@ -70,12 +70,12 @@ export const DebugPanel = ({
           cursor: 'pointer'
         }}>
         Debug Info
-        <button 
+        <div 
           style={ButtonStyle}
           title={isMinimized ? "Expand" : "Collapse"}
         >
           {isMinimized ? <Plus size={14} /> : <Minus size={14} />}
-        </button>
+        </div>
       </div>
       {!isMinimized && (
         <>
