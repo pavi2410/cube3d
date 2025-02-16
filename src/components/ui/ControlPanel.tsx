@@ -1,4 +1,3 @@
-import { ViewState, Vec3 } from '../../types';
 import { Home, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import { Tooltip } from './Tooltip';
 

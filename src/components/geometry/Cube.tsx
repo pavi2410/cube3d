@@ -1,4 +1,4 @@
-import { Vec3, Point2D, Selection, ViewState } from '../../types';
+import type { Vec3, Point2D, Selection, ViewState } from '../../types';
 import { Transform } from '../../utils/math';
 import { CUBE_VERTICES, CUBE_FACES } from './CubeGeometry';
 import { Face } from './Face';
@@ -86,7 +86,7 @@ export const Cube = ({
       )}
 
       {/* Corners */}
-      {transformedVertices.map((vertex, index) => (
+      {transformedVertices.map((_vertex, index) => (
         <Corner
           key={`corner-${index}`}
           point={projectedVertices[index]}
