@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Selection, DisplayMode, ObjectState, EnvironmentState } from './types';
+import type { Selection, DisplayMode, ObjectState, EnvironmentState } from './types';
 import { useInteraction } from './hooks/useInteraction';
 import { Cube } from './components/geometry/Cube';
 import { Grid } from './components/grid/Grid';
@@ -9,6 +9,7 @@ import { InfoPanel } from './components/ui/InfoPanel';
 import { DebugPanel } from './components/ui/DebugPanel';
 import { Normals } from './components/geometry/Normals';
 import { ControlPanel } from './components/ui/ControlPanel';
+import { useKeydownHandler } from './hooks/useKeydownHandler';
 
 // Constants with type annotations
 const DEFAULT_OBJECT_STATE: ObjectState = {
@@ -98,17 +99,12 @@ export default function App() {
   };
 
   // Add keyboard shortcuts
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === 'r' || e.key === 'R') handleReset();
-      if (e.key === 'c' || e.key === 'C') handleCenter();
-      if (e.key === '+' || e.key === '=') handleZoomIn();
-      if (e.key === '-' || e.key === '_') handleZoomOut();
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [handleReset, handleCenter, handleZoomIn, handleZoomOut]);
+  useKeydownHandler((e: KeyboardEvent) => {
+    if (e.key === 'r' || e.key === 'R') handleReset();
+    if (e.key === 'c' || e.key === 'C') handleCenter();
+    if (e.key === '+' || e.key === '=') handleZoomIn();
+    if (e.key === '-' || e.key === '_') handleZoomOut();
+  });
 
   // Double click handler for axes toggle
   const handleDoubleClick = () => {
@@ -133,7 +129,7 @@ export default function App() {
         width="100%"
         height="100%"
         style={{
-          cursor: state.isPanning 
+          cursor: state.isPanning
             ? 'grabbing' 
             : state.isDragging 
               ? 'grabbing'

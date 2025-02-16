@@ -1,5 +1,5 @@
-import { useState, useCallback, Dispatch, SetStateAction } from 'react';
-import { Vec3, Point2D, Selection, ViewState } from '../types';
+import { useState, useCallback, type Dispatch, type SetStateAction } from 'react';
+import type { Vec3, Point2D, Selection, ViewState } from '../types';
 
 // New types for state organization
 type ObjectState = {
