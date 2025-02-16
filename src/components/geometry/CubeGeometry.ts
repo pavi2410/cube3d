@@ -1,4 +1,4 @@
-import { Vec3 } from '../../types';
+import type { Vec3 } from '../../types';
 
 export const CUBE_VERTICES: Vec3[] = [
   // Front face (z = 0.5)

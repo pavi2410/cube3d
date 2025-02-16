@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Vec3, ViewState, Selection, DisplayMode } from '../../types';
+import type { Vec3, ViewState, Selection, DisplayMode } from '../../types';
 import { Minus, Plus } from 'lucide-react';
 
 type DebugPanelProps = {

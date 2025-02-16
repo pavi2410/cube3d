@@ -1,5 +1,5 @@
-import { Point2D, ViewState } from '../../types';
-import { Transform } from '../../utils/math';
+import type { Point2D, ViewState } from '../../types';
+import { projectPoint } from '../../utils/math';
 
 type InfiniteAxesProps = {
   center: Point2D;
@@ -12,20 +12,20 @@ export const InfiniteAxes = ({ center, view }: InfiniteAxesProps) => {
     return [
       // X-axis
       {
-        start: Transform.projectPoint({ x: -length, y: 0, z: 0 }, center, view),
-        end: Transform.projectPoint({ x: length, y: 0, z: 0 }, center, view),
+        start: projectPoint({ x: -length, y: 0, z: 0 }, center, view),
+        end: projectPoint({ x: length, y: 0, z: 0 }, center, view),
         color: 'rgba(255, 0, 0, 0.3)'
       },
       // Y-axis
       {
-        start: Transform.projectPoint({ x: 0, y: -length, z: 0 }, center, view),
-        end: Transform.projectPoint({ x: 0, y: length, z: 0 }, center, view),
+        start: projectPoint({ x: 0, y: -length, z: 0 }, center, view),
+        end: projectPoint({ x: 0, y: length, z: 0 }, center, view),
         color: 'rgba(0, 255, 0, 0.3)'
       },
       // Z-axis
       {
-        start: Transform.projectPoint({ x: 0, y: 0, z: -length }, center, view),
-        end: Transform.projectPoint({ x: 0, y: 0, z: length }, center, view),
+        start: projectPoint({ x: 0, y: 0, z: -length }, center, view),
+        end: projectPoint({ x: 0, y: 0, z: length }, center, view),
         color: 'rgba(0, 0, 255, 0.3)'
       }
     ];

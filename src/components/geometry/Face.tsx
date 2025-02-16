@@ -1,5 +1,5 @@
-import { Vec3, Point2D, Selection } from '../../types';
-import { Transform } from '../../utils/math';
+import type { Vec3, Point2D, Selection } from '../../types';
+import { getNormalVector, isFaceVisible } from '../../utils/math';
 
 type FaceProps = {
   vertices: Vec3[];
@@ -20,12 +20,12 @@ export const Face = ({
   onSelect,
   onDeselect
 }: FaceProps) => {
-  const isVisible = Transform.isFaceVisible(vertices);
+  const isVisible = isFaceVisible(vertices);
   const isSelected = selection.type === 'face' && selection.index === index;
   
   if (!isVisible) return null;
 
-  const normal = Transform.getNormalVector(vertices);
+  const normal = getNormalVector(vertices);
   
   // Calculate lighting based on normal
   const lightDir = { x: -0.5, y: -0.5, z: -1 }; // Light direction

@@ -1,9 +1,9 @@
 import type { Vec3, Point2D, Selection, ViewState } from '../../types';
-import { Transform } from '../../utils/math';
 import { CUBE_VERTICES, CUBE_FACES } from './CubeGeometry';
 import { Face } from './Face';
 import { Edge } from './Edge';
 import { Corner } from './Corner';
+import { rotatePoint, projectPoint, isFaceVisible } from '../../utils/math';
 
 type CubeProps = {
   position: Vec3;
@@ -36,7 +36,7 @@ export const Cube = ({
       y: vertex.y * scale.y,
       z: vertex.z * scale.z
     };
-    const rotated = Transform.rotatePoint(scaled, rotation);
+    const rotated = rotatePoint(scaled, rotation);
     return {
       x: rotated.x + position.x,
       y: rotated.y + position.y,
@@ -46,7 +46,7 @@ export const Cube = ({
 
   // Project to 2D
   const projectedVertices = transformedVertices.map(v => 
-    Transform.projectPoint(v, center, view)
+    projectPoint(v, center, view)
   );
 
   return (
@@ -76,7 +76,7 @@ export const Cube = ({
               end={projectedVertices[end]}
               index={edgeIndex}
               faceIndex={faceIndex}
-              isVisible={Transform.isFaceVisible(face.indices.map(i => transformedVertices[i]))}
+              isVisible={isFaceVisible(face.indices.map(i => transformedVertices[i]))}
               selection={selection}
               onSelect={onSelect}
               onDeselect={onDeselect}

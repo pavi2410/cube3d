@@ -1,4 +1,4 @@
-import { Point2D, Selection } from '../../types';
+import type { Point2D, Selection } from '../../types';
 
 type EdgeProps = {
   start: Point2D;

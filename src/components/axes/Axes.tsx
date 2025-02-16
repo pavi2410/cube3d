@@ -1,5 +1,5 @@
-import { Vec3, Point2D, ViewState } from '../../types';
-import { Transform } from '../../utils/math';
+import type { Vec3, Point2D, ViewState } from '../../types';
+import { projectPoint, rotatePoint } from '../../utils/math';
 
 type AxesProps = {
   position: Vec3;
@@ -19,10 +19,10 @@ export const Axes = ({ position, rotation, scale, view, center }: AxesProps) => 
   return (
     <g>
       {axesConfig.map((axis, i) => {
-        const start = Transform.projectPoint(position, center, view);
+        const start = projectPoint(position, center, view);
         
-        const rotated = Transform.rotatePoint(axis.vec, rotation);
-        const end = Transform.projectPoint(
+        const rotated = rotatePoint(axis.vec, rotation);
+        const end = projectPoint(
           {
             x: position.x + rotated.x * scale.x,
             y: position.y + rotated.y * scale.y,

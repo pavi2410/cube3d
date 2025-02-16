@@ -1,5 +1,5 @@
-import { Point2D, ViewState } from '../../types';
-import { Transform } from '../../utils/math';
+import type { Point2D, ViewState } from '../../types';
+import { projectPoint } from '../../utils/math';
 
 type GridProps = {
   center: Point2D;
@@ -19,8 +19,8 @@ export const Grid = ({ center, view }: GridProps) => {
       
       if (opacity > 0.01) { // Only add visible lines
         lines.push([
-          Transform.projectPoint({ x: x1, y: 0, z: z1 }, center, view),
-          Transform.projectPoint({ x: x2, y: 0, z: z2 }, center, view),
+          projectPoint({ x: x1, y: 0, z: z1 }, center, view),
+          projectPoint({ x: x2, y: 0, z: z2 }, center, view),
           `rgba(255, 255, 255, ${opacity})`
         ]);
       }
